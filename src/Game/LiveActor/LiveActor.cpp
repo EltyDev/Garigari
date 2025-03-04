@@ -3,7 +3,6 @@
 #include "LiveActor/HitSensorKeeper.hpp"
 #include "LiveActor/Spine.hpp"
 #include "Map/StageSwitch.hpp"
-#include "revolution/types.h"
 
 void LiveActor::init(const JMapInfoIter &) {}
 

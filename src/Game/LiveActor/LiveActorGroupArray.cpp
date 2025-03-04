@@ -4,7 +4,6 @@
 #include "Util.hpp"
 #include "Util/JMapIdInfo.hpp"
 #include "Util/JMapInfo.hpp"
-#include "revolution/types.h"
 #include <cstdio>
 
 // nonmatching

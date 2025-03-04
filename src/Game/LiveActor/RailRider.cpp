@@ -1,5 +1,4 @@
 #include "LiveActor/RailRider.hpp"
-#include "JGeometry.hpp"
 #include "Util/MathUtil.hpp"
 #include "Util/SceneUtil.hpp"
 

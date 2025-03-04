@@ -2,7 +2,6 @@
 #include "LiveActor/SensorGroup.hpp"
 #include "LiveActor/SensorHitChecker.hpp"
 #include "LiveActor/LiveActor.hpp"
-#include "revolution/types.h"
 
 // HitSensor::HitSensor
 HitSensor::HitSensor(u32 type, u16 groupSize, f32 radius, LiveActor *pActor) {

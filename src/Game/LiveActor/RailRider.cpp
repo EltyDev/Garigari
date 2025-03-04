@@ -1,6 +1,8 @@
 #include "LiveActor/RailRider.hpp"
+#include "JGeometry.hpp"
 #include "Util/MathUtil.hpp"
 #include "Util/SceneUtil.hpp"
+
 
 RailRider::RailRider(const JMapInfoIter &rIter) {
     mBezierRail = nullptr;
@@ -62,6 +64,28 @@ void RailRider::move() {
 
 void RailRider::moveToNearestPos(const TVec3f &rPos) {
     mCoord = mBezierRail->getNearestRailPosCoord(rPos);
+    syncPosDir();
+}
+
+void RailRider::moveToNearestPoint(const TVec3f& rPoint) {
+    float minDist = FLT_MAX;
+    int closestIndex = 0;
+
+    for (int i = 0; i < (int)mBezierRail->mPointNum; ++i) {
+        TVec3f point;
+        copyPointPos(&point, i);
+        //WIP Implement and using PSVECDotProduct
+        float dx = rPoint.x - point.x;
+        float dy = rPoint.y - point.y;
+        float dist = dx * dx + dy * dy;
+
+        if (dist < minDist) {
+            minDist = dist;
+            closestIndex = i;
+        }
+    }
+
+    mCoord = mBezierRail->getRailPosCoord(closestIndex);
     syncPosDir();
 }
 
@@ -288,6 +312,23 @@ bool RailRider::getNextPointArgS32WithInit(const char *pStr, s32 *pOut) const {
     mBezierRail->calcRailCtrlPointIter(&iter, getNextPointNo());
     iter.getValue<s32>(pStr, pOut);
     return true;
+}
+
+s32 RailRider::getNextPointNo() const {
+    s32 direction = -1;
+    if (mIsNotReverse)
+        direction = 1;
+    if (this->mBezierRail->mIsClosed) {
+        s32 relativePoint = mCurPoint + mBezierRail->mPointNum;
+        return (s32) (relativePoint + direction + mBezierRail->mPointNum) % (s32) mBezierRail->mPointNum;
+    }
+    s32 nextPoint = mCurPoint + direction;
+    s32 pointNum = mBezierRail->mPointNum - 1;
+    if (nextPoint < 0)
+        return 0;
+    if (nextPoint > pointNum)
+        return pointNum;
+    return nextPoint;
 }
 
 /* instruction swap at the end */

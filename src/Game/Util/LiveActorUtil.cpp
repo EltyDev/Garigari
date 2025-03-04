@@ -1,4 +1,5 @@
 #include "Util/LiveActorUtil.hpp"
+#include "LiveActor/LiveActor.hpp"
 #include "LiveActor/LodCtrl.hpp"
 
 namespace MR {
@@ -20,4 +21,12 @@ namespace MR {
         ctrl->setFarClipping(farClip);
         return ctrl;
     }
+
+    bool isClipped(const LiveActor *pActor) {
+        return pActor->mFlags.mIsClipped;
+    }
+
+    void resetPosition() {}
+
+
 };

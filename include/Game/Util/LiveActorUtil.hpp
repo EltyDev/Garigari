@@ -9,6 +9,9 @@ class HitSensor;
 class ModelObj;
 class LodCtrl;
 
+template<typename T>
+class TVec3;
+
 namespace MR {
     void initSensors(LiveActor *, const char *, const char *);
     void initSwitches(LiveActor *, const JMapInfoIter &, const char *, const char *);
@@ -53,5 +56,9 @@ namespace MR {
 
     LodCtrl* createLodCtrlNPC(LiveActor *, const JMapInfoIter &);
     LodCtrl* createLodCtrlPlanet(LiveActor *, const JMapInfoIter &, f32, s32);
+
+    void resetPosition(LiveActor *);
+    void resetPosition(LiveActor* actor, TVec3<float>& position);
+    void resetPosition(LiveActor* actor, const char* name);
     
 };

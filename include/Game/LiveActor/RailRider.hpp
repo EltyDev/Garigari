@@ -1,4 +1,4 @@
-#pragma once
+    #pragma once
 
 #include <revolution.h>
 #include <JGeometry.hpp>
@@ -53,13 +53,15 @@ public:
     BezierRail* mBezierRail; // 0x0
     f32 mCoord; // 0x4
     f32 mSpeed; // 0x8
-    bool mIsNotReverse;
-    u8 _D;
-    u8 _E;
-    u8 _F;
+    bool mIsNotReverse; //0xC
+    u8 _D; // 0xD
+    u8 _E; // 0xE
+    u8 _F; // 0xF
     TVec3f mCurPos; // 0x10
     TVec3f mCurDirection; // 0x1C
     TVec3f mStartPos; // 0x28
     TVec3f mEndPos; // 0x34
     s32 mCurPoint; // 0x40
 };
+
+#define FLT_MAX 3.402823466e+38F;

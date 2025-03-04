@@ -1,6 +1,6 @@
 #pragma once
 
-#include "JSupport/JSUList.hpp"
+#include "JSUpport/JSUList.hpp"
 
 class JKRHeap;
 

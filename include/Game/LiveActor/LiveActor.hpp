@@ -84,3 +84,7 @@ public:
     StarPointerTarget* mPointerTarget;      // 0x88
     ActorLightCtrl* mLightCtrl;             // 0x8C
 };
+
+namespace MR {
+    bool isClipped(const LiveActor *);
+}

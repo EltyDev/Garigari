@@ -3,6 +3,7 @@
 #include "LiveActor/HitSensorKeeper.hpp"
 #include "LiveActor/Spine.hpp"
 #include "Map/StageSwitch.hpp"
+#include "revolution/types.h"
 
 void LiveActor::init(const JMapInfoIter &) {}
 
@@ -10,7 +11,19 @@ void LiveActor::appear() {
     makeActorAppeared();
 }
 
-// LiveActor::makeActorAppeared
+
+
+void LiveActor::makeActorAppeared() {
+    //WIP
+    if (mSensorKeeper == nullptr) {
+        this->mFlags.mIsDead = false;
+        if (!MR::isClipped(this)) {
+            if (this->mCollisionParts == nullptr) {
+            }
+        }
+    }
+}
+
 // LiveActor::kill
 // LiveActor::makeActorDead
 // LiveActor::movement

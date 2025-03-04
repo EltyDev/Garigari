@@ -2,8 +2,29 @@
 #include "LiveActor/SensorGroup.hpp"
 #include "LiveActor/SensorHitChecker.hpp"
 #include "LiveActor/LiveActor.hpp"
+#include "revolution/types.h"
 
 // HitSensor::HitSensor
+HitSensor::HitSensor(u32 type, u16 groupSize, f32 radius, LiveActor *pActor) {
+    this->mType = type;
+    this->mOffset.x = 0;
+    this->mOffset.y = 0;
+    this->mOffset.z = 0;
+    this->mRadius = radius;
+    this->mSensorCount = 0;
+    this->mGroupSize = groupSize;
+    this->mSensors = nullptr;
+    this->mSensorGroup = nullptr;
+    this->mValidBySystem = false;
+    this->mValidByHost = true;
+    this->mHostActor = pActor;
+    if (this->mGroupSize != 0) {
+        this->mSensors = new HitSensor*[this->mGroupSize];
+        for (int i = 0; i < this->mGroupSize; ++i)
+            mSensors[i] = nullptr;
+    }
+    MR::initHitSensorGroup(this);
+}
 
 bool HitSensor::receiveMessage(u32 msg, HitSensor *pOther) {
     return mHostActor->receiveMessage(msg, pOther, this);

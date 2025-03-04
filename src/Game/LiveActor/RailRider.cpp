@@ -1,4 +1,5 @@
 #include "LiveActor/RailRider.hpp"
+#include "JGeometry.hpp"
 #include "Util/MathUtil.hpp"
 #include "Util/SceneUtil.hpp"
 
@@ -66,21 +67,24 @@ void RailRider::moveToNearestPos(const TVec3f &rPos) {
     syncPosDir();
 }
 
-void RailRider::moveToNearestPoint(const TVec3f &rPoint) {
+void RailRider::moveToNearestPoint(const TVec3f& rPoint) {
     float minDist = FLT_MAX;
     int closestIndex = 0;
-    for (int i = 0; i < mBezierRail->mPointNum; ++i) {
+
+    for (int i = 0; i < (int)mBezierRail->mPointNum; ++i) {
         TVec3f point;
         copyPointPos(&point, i);
-        /* Missing altivec optimization */
+        //WIP Implement and using PSVECDotProduct
         float dx = rPoint.x - point.x;
         float dy = rPoint.y - point.y;
         float dist = dx * dx + dy * dy;
+
         if (dist < minDist) {
             minDist = dist;
             closestIndex = i;
         }
     }
+
     mCoord = mBezierRail->getRailPosCoord(closestIndex);
     syncPosDir();
 }

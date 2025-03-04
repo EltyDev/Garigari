@@ -3,6 +3,8 @@
 #include "LiveActor/HitSensor.hpp"
 #include "Util.hpp"
 #include "Util/JMapIdInfo.hpp"
+#include "Util/JMapInfo.hpp"
+#include "revolution/types.h"
 #include <cstdio>
 
 // nonmatching
@@ -80,6 +82,33 @@ MsgSharedGroup* LiveActorGroupArray::createGroup(const JMapInfoIter &rIter, cons
     mGroups[curGroups] = group;
     return group;
 }
+
+MsgSharedGroup* LiveActorGroupArray::findGroup(const JMapInfoIter &rIter) const {
+    //WIP
+    JMapIdInfo &idInfo = MR::createJMapIdInfoFromGroupId(rIter);
+    MsgSharedGroup * const *end = this->mGroups + mNumUsedGroups;
+    for (MsgSharedGroup * const *groups = this->mGroups; groups != end; ++groups) {
+        MsgSharedGroup *group = *groups;
+        if (group->mIdInfo->_0 == idInfo._0 &&
+            group->mIdInfo->mZoneID == idInfo.mZoneID)
+            return group;
+    }
+    return nullptr;
+}
+
+MsgSharedGroup* LiveActorGroupArray::findGroup(const LiveActor *actor) const {
+    //WIP
+    MsgSharedGroup * const *end = this->mGroups + mNumUsedGroups;
+    for (MsgSharedGroup * const *groups = this->mGroups; groups != end; ++groups) {
+        MsgSharedGroup *group = *groups;
+        for (s32 i = 0; i < group->mObjectCount; ++i) {
+            if (group->getActor(i) == actor)
+                return group;
+        }
+    }
+    return nullptr;
+}
+
 
 // findGroup__19LiveActorGroupArrayCFRC12JMapInfoIter
 // findGroup__19LiveActorGroupArrayCFPC9LiveActor

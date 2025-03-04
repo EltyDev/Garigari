@@ -26,6 +26,10 @@ void LiveActor::setNerve(const Nerve *pNerve) {
     mSpine->setNerve(pNerve);
 }
 
+void LiveActor::kill(){
+
+}
+
 bool LiveActor::isNerve(const Nerve *pNerve) const {
     return mSpine->getCurrentNerve() == pNerve;
 }

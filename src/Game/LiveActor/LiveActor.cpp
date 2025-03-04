@@ -40,7 +40,12 @@ void LiveActor::setNerve(const Nerve *pNerve) {
 }
 
 void LiveActor::kill(){
-
+    if (mSwitchCtrl && !mSwitchCtrl->isValidSwitchDead()){
+        return;
+    }
+    if (mSensorKeeper){
+        mSensorKeeper->invalidate();
+    }
 }
 
 bool LiveActor::isNerve(const Nerve *pNerve) const {

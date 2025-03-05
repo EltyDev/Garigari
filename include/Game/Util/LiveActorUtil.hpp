@@ -60,5 +60,5 @@ namespace MR {
     void resetPosition(LiveActor *);
     void resetPosition(LiveActor* actor, TVec3<float>& position);
     void resetPosition(LiveActor* actor, const char* name);
-    
+    void onSwitchDead(LiveActor*);
 };

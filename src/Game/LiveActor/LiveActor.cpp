@@ -3,6 +3,7 @@
 #include "LiveActor/HitSensorKeeper.hpp"
 #include "LiveActor/Spine.hpp"
 #include "Map/StageSwitch.hpp"
+#include "Util/LiveActorUtil.hpp"
 
 void LiveActor::init(const JMapInfoIter &) {}
 
@@ -39,11 +40,13 @@ void LiveActor::setNerve(const Nerve *pNerve) {
 }
 
 void LiveActor::kill(){
-    if (mSwitchCtrl && !mSwitchCtrl->isValidSwitchDead()){
-        return;
-    }
-    if (mSensorKeeper){
-        mSensorKeeper->invalidate();
+    this->makeActorDead();
+    if (this->mSwitchCtrl){
+        if (this->mSwitchCtrl->isValidSwitchDead()){
+            if ( this->mSwitchCtrl->_10 ) {
+                MR::onSwitchDead(this);
+            }
+        }
     }
 }
 
